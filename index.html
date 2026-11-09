@@ -15,7 +15,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.45 Inter,system-ui,sans-serif}
 button,input,select,textarea{font:inherit;color:inherit}
-header{position:sticky;top:0;z-index:5;background:linear-gradient(#14110f,#14110fee);padding:12px 16px 0;border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:5;background:#14110f;padding:12px 16px 0;border-bottom:1px solid var(--line)}
 h1{font-family:Cinzel,serif;font-size:20px;margin:0;letter-spacing:.5px;color:var(--acc)}
 .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .pill{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--panel2);color:var(--mute);white-space:nowrap}
@@ -403,12 +403,26 @@ function highlight(text, hits){
   // surlignage approximatif mot par mot (comparaison sans accents)
   return h.split(/(\s+)/).map(w => { const nw = norm(w); return nw && kws.some(k => !k.includes(" ") && (nw===k || (k.length>=4 && nw.startsWith(k)))) ? `<mark>${w}</mark>` : w; }).join("");
 }
-function ingest(text, weight=1){
-  const hits = analyse(text, weight);
-  lines.push(highlight(text, hits));
+let lastFinal = "", lastFinalT = 0;
+function ingest(text, weight=1, fromMic=false){
+  text = text.trim(); if (!text) return;
+  let delta = text, replace = false;
+  if (fromMic) {
+    const n = norm(text), p = norm(lastFinal), recent = Date.now() - lastFinalT < 6000;
+    if (recent && n === p) return;                          // répétition exacte
+    if (recent && p && n.startsWith(p)) {                    // même phrase, prolongée
+      delta = text.slice(lastFinal.length); replace = true;
+      if (norm(delta) === "") { lastFinal = text; lastFinalT = Date.now(); return; }
+    }
+    lastFinal = text; lastFinalT = Date.now();
+  }
+  analyse(delta, weight);
+  const line = highlight(text, compileAll());
+  if (replace && lines.length) lines[lines.length-1] = line; else lines.push(line);
   showTranscript("");
   evaluate();
 }
+function compileAll(){ return ambs().flatMap(a => compileKw(a).map(k => ({k}))); }
 async function keepAwake(){ try { if ("wakeLock" in navigator && listening) wakeLock = await navigator.wakeLock.request("screen"); } catch(e){} }
 document.addEventListener("visibilitychange", () => { if (document.visibilityState==="visible") keepAwake(); });
 
@@ -420,7 +434,7 @@ function startRec(){
     let interim = "";
     for (let i = ev.resultIndex; i < ev.results.length; i++) {
       const r = ev.results[i];
-      if (r.isFinal) ingest(r[0].transcript); else interim += r[0].transcript;
+      if (r.isFinal) ingest(r[0].transcript, 1, true); else interim += r[0].transcript;
     }
     if (interim) showTranscript(interim);
   };
