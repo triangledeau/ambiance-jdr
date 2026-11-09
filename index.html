@@ -92,7 +92,7 @@ code{background:var(--bg);padding:2px 5px;border-radius:5px;font-size:12.5px;wor
   </div>
   <div class="grid" id="ambGrid"></div>
   <div class="card" style="margin-top:14px">
-    <div class="row" style="justify-content:space-between"><b>Ce que j'entends</b><span class="hint" id="micState">micro coupé</span></div>
+    <div class="row" style="justify-content:space-between"><b>Ce que j'entends</b> <span class="hint">v5</span><span class="hint" id="micState">micro coupé</span></div>
     <div class="trans" id="trans"><p class="hint">La transcription s'affichera ici. Les mots-clés reconnus sont surlignés.</p></div>
     <label>Tester sans micro (tape une phrase de MJ)</label>
     <div class="row"><input type="text" id="simTxt" placeholder="Ex. : une créature surgit de la crypte !" style="flex:1"><button class="btn" id="simBtn">Envoyer</button></div>
@@ -408,15 +408,17 @@ function ingest(text, weight=1, fromMic=false){
   text = text.trim(); if (!text) return;
   let delta = text, replace = false;
   if (fromMic) {
-    const n = norm(text), p = norm(lastFinal), recent = Date.now() - lastFinalT < 6000;
-    if (recent && n === p) return;                          // répétition exacte
-    if (recent && p && n.startsWith(p)) {                    // même phrase, prolongée
-      delta = text.slice(lastFinal.length); replace = true;
-      if (norm(delta) === "") { lastFinal = text; lastFinalT = Date.now(); return; }
+    const a = norm(lastFinal).split(" ").filter(Boolean), b = norm(text).split(" ").filter(Boolean);
+    const recent = Date.now() - lastFinalT < 20000;
+    let cp = 0; while (cp < a.length && cp < b.length && a[cp] === b[cp]) cp++;
+    // même phrase reprise / prolongée / légèrement corrigée par la reconnaissance
+    if (recent && a.length && cp >= Math.max(1, Math.ceil(Math.min(a.length, b.length) * 0.6))) {
+      replace = true;
+      delta = b.slice(Math.max(cp, a.length)).join(" ");
     }
     lastFinal = text; lastFinalT = Date.now();
   }
-  analyse(delta, weight);
+  if (delta) analyse(delta, weight);
   const line = highlight(text, compileAll());
   if (replace && lines.length) lines[lines.length-1] = line; else lines.push(line);
   showTranscript("");
