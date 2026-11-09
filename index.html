@@ -169,6 +169,17 @@ const PRESETS = {
     {emoji:"🔥",name:"Feu de camp",playlist:"https://open.spotify.com/playlist/7loBeNsSPamwV7sK4X0qJG",plName:"Fantasy Chill | D&D | RPG",prio:false,kw:"camp, feu de camp, bivouac, repos, dormir, nuit, tour de garde, étoile, histoire, souvenir, soigner, repos long, repos court"},
     {emoji:"🥀",name:"Tristesse",playlist:"https://open.spotify.com/playlist/6ePF1N5TPfVRf82fqrRykt",plName:"Elven Ballads / Fantasy Music",prio:false,kw:"mort, mourir, funérailles, deuil, larme, pleur, adieu, perdu, tombe, sacrifice, regret"}
   ]},
+  chatons: { name: "Donjons & Chatons", ambs: [
+    {emoji:"🏡",name:"Village & refuge",playlist:"https://open.spotify.com/playlist/1Et68bQi8EFbFmocUJ8V6o",plName:"Fantasy & Chill (Cozy, Magical, Tavern…)",prio:false,kw:"village, maison, refuge, panier, coussin, sieste, ronron, croquette, lait, auberge, marché, famille, câlin, abri, foyer, voisin, boulanger"},
+    {emoji:"🌳",name:"Aventure & exploration",playlist:"https://open.spotify.com/playlist/1gWKySeAk2NH4x6URowjvn",plName:"ROOT Board Game Music",prio:false,kw:"forêt, chemin, route, voyage, explor, rivière, colline, carte, quête, aventure, prairie, arbre, grimp, sentier, montagne, pont, horizon"},
+    {emoji:"🏚️",name:"Ruines des Anciens",playlist:"https://open.spotify.com/album/4XgGOMRY7H4hl6OQi5wb2Z",plName:"Hollow Knight (Original Soundtrack)",prio:false,kw:"ruine, ancien, humain, machine, rouille, ferraille, voiture, pneu, béton, tuyau, ampoule, usine, bâtiment, autoroute, épave, vestige, tunnel, métal, bricol"},
+    {emoji:"✨",name:"Miagie",playlist:"https://open.spotify.com/playlist/5gmcpMlhNfoQOynwH5Wx3L",plName:"Fantasy Book Ambience",prio:false,kw:"miagie, miagicien, magie, sort, sortilège, potion, rune, enchant, cristal, étoile, lune, sorcier, pouvoir, fée, source, incantation, baguette"},
+    {emoji:"🐾",name:"Discrétion & malice",playlist:"https://open.spotify.com/playlist/0C5oen1Smno054eOOLiXqv",plName:"Mood: Sneaky",prio:false,kw:"discret, discrétion, cacher, caché, ombre, silence, chut, chiper, faufil, ramper, pattes de velours, espionn, piège, ruse, rusé, malin, voleur, en douce"},
+    {emoji:"⚔️",name:"Bagarre",playlist:"https://open.spotify.com/playlist/5itc0hInJaDGosUvmwVwxC",plName:"DnD Combat Music",prio:true,kw:"combat, bagarre, attaque, griffe, griff, mord, frapp, chien, rat, sbire, se battre, feul, croc, initiative, dégât, blessé, costaud, coup de patte"},
+    {emoji:"👑",name:"Roi Walter",playlist:"https://open.spotify.com/playlist/086S2DRav7alKniKTfU27m",plName:"Best Villain Themes",prio:true,kw:"walter, roi, couronne, château, trône, exil, exilé, méchant, tyran, soldat, armée, proclamation, cour royale, garde royal, majesté"},
+    {emoji:"🐸",name:"Marais",playlist:"https://open.spotify.com/playlist/4yYRi187VEsV2DJSBnkQny",plName:"Dark Forest Ambience",prio:false,kw:"marais, boue, vase, brume, brouillard, grenouille, crapaud, roseau, moustique, tourbière, étang, marécage, inquiétant, gluant, mouillé"},
+    {emoji:"🎉",name:"Fête & victoire",playlist:"https://open.spotify.com/playlist/6K157co2HthsrriCt7kPlx",plName:"Musique de taverne",prio:false,kw:"fête, festin, victoire, gagné, bravo, danse, chanson, banquet, récompense, trésor, hourra, célébr, médaille, réussi, héros"}
+  ]},
   perso: { name: "Personnalisé", ambs: [
     {emoji:"🎵",name:"Ambiance 1",prio:false,kw:""}
   ]}
@@ -184,6 +195,7 @@ function defaults(){
 }
 let S;
 try { S = Object.assign(defaults(), JSON.parse(localStorage.getItem(KEY) || "{}")); } catch(e){ S = defaults(); }
+for (const k in PRESETS) if (!S.universes[k]) S.universes[k] = clone(defaults().universes[k]);
 for (const k in PRESETS) if (S.universes[k]) S.universes[k].ambs.forEach(a => {
   const p = PRESETS[k].ambs.find(x => x.name===a.name);
   if (p && p.playlist && !a.playlist) { a.playlist = p.playlist; a.plName = p.plName; }
