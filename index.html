@@ -150,24 +150,24 @@ code{background:var(--bg);padding:2px 5px;border-radius:5px;font-size:12.5px;wor
 /* ================= PRÉRÉGLAGES ================= */
 const PRESETS = {
   horreur: { name: "Horreur / Lovecraft", ambs: [
-    {emoji:"🏛️",name:"Ville & quotidien",prio:false,kw:"rue, gare, train, hôtel, café, journal, bureau, université, miskatonic, arkham, boston, kingsport, voiture, taxi, restaurant, dîner, matin, police, commissariat, bavarder, discuter"},
-    {emoji:"🔎",name:"Enquête",prio:false,kw:"enquête, indice, bibliothèque, archive, manuscrit, grimoire, lire, déchiffr, interroger, témoin, fouill, examin, document, lettre, carnet, photograph, registre, recherch, piste"},
-    {emoji:"🌫️",name:"Tension",prio:false,kw:"silence, ombre, obscurité, noir, bruit, grincement, craquement, murmure, chuchot, souffle, froid, frisson, brouillard, porte, couloir, cave, grenier, escalier, lanterne, bougie, étrange, inquiét, malaise, nuit"},
-    {emoji:"🐙",name:"Horreur indicible",prio:true,kw:"tentacul, créature, abomination, indicible, innommable, monstre, cthulhu, dagon, shoggoth, profond, rituel, culte, cultiste, sacrifice, sang, cadavre, corps, hurl, cri, folie, santé mentale, test de sang, horreur, invocation, autel, chair"},
-    {emoji:"🔫",name:"Combat / fuite",prio:true,kw:"combat, initiative, attaque, frapp, tir, revolver, fusil, pistolet, couteau, dégât, blessé, fuir, fuite, courir, cour, poursuite, sauter, esquiv, coup de feu, balle"},
-    {emoji:"🌊",name:"Mer & côte",prio:false,kw:"mer, océan, port, bateau, navire, quai, vague, marée, plage, falaise, phare, innsmouth, pêcheur, embrun, récif, sel, mouette"},
-    {emoji:"🕯️",name:"Répit",prio:false,kw:"repos, dormir, sommeil, soign, sauvé, soulag, calme, retour, rentrer, apaisé, fin de la séance, pause"}
+    {emoji:"🏛️",name:"Ville & quotidien",playlist:"https://open.spotify.com/playlist/1hsxutJarPZgTeyrp4oACa",plName:"The Call of Cthulhu Sessions",prio:false,kw:"rue, gare, train, hôtel, café, journal, bureau, université, miskatonic, arkham, boston, kingsport, voiture, taxi, restaurant, dîner, matin, police, commissariat, bavarder, discuter"},
+    {emoji:"🔎",name:"Enquête",playlist:"https://open.spotify.com/playlist/4Jyeh1Zw6TVjb3gEu7qIga",plName:"Call of Cthulhu ambience",prio:false,kw:"enquête, indice, bibliothèque, archive, manuscrit, grimoire, lire, déchiffr, interroger, témoin, fouill, examin, document, lettre, carnet, photograph, registre, recherch, piste"},
+    {emoji:"🌫️",name:"Tension",playlist:"https://open.spotify.com/playlist/4etBZsUlxUIn8gGInjcdHi",plName:"Call of Cthulhu - Creepy",prio:false,kw:"silence, ombre, obscurité, noir, bruit, grincement, craquement, murmure, chuchot, souffle, froid, frisson, brouillard, porte, couloir, cave, grenier, escalier, lanterne, bougie, étrange, inquiét, malaise, nuit"},
+    {emoji:"🐙",name:"Horreur indicible",playlist:"https://open.spotify.com/playlist/1sfH4I4tCwh7443bCeiy2R",plName:"Call of Cthulhu Roleplaying Music",prio:true,kw:"tentacul, créature, abomination, indicible, innommable, monstre, cthulhu, dagon, shoggoth, profond, rituel, culte, cultiste, sacrifice, sang, cadavre, corps, hurl, cri, folie, santé mentale, test de sang, horreur, invocation, autel, chair"},
+    {emoji:"🔫",name:"Combat / fuite",playlist:"https://open.spotify.com/playlist/7FeLdDpkmpd1Zf3V5wRn5w",plName:"Call of Cthulhu Combat",prio:true,kw:"combat, initiative, attaque, frapp, tir, revolver, fusil, pistolet, couteau, dégât, blessé, fuir, fuite, courir, cour, poursuite, sauter, esquiv, coup de feu, balle"},
+    {emoji:"🌊",name:"Mer & côte",playlist:"https://open.spotify.com/playlist/6oljyBfW7pYVP2JWNCzi1M",plName:"Deep Sea Horror Ambience",prio:false,kw:"mer, océan, port, bateau, navire, quai, vague, marée, plage, falaise, phare, innsmouth, pêcheur, embrun, récif, sel, mouette"},
+    {emoji:"🕯️",name:"Répit",playlist:"https://open.spotify.com/playlist/7bfVVP5UZSsNRRXvTpwUmo",plName:"Call of Cthulu Background Music",prio:false,kw:"repos, dormir, sommeil, soign, sauvé, soulag, calme, retour, rentrer, apaisé, fin de la séance, pause"}
   ]},
   fantasy: { name: "Fantasy médiévale", ambs: [
-    {emoji:"🍺",name:"Taverne",prio:false,kw:"taverne, auberge, bière, hydromel, aubergiste, barde, chope, ivre, ripaille, comptoir, chambre, repas, tavernier"},
-    {emoji:"🏰",name:"Ville & marché",prio:false,kw:"ville, cité, marché, marchand, échoppe, garde, château, roi, reine, seigneur, noble, palais, rue, place, forgeron, temple, acheter, vendre"},
-    {emoji:"🌲",name:"Voyage & nature",prio:false,kw:"forêt, route, chemin, voyage, plaine, colline, montagne, rivière, cheval, monture, marche, campagne, sentier, horizon, lieue, village"},
-    {emoji:"🗝️",name:"Donjon",prio:false,kw:"donjon, souterrain, caverne, grotte, crypte, tombeau, couloir, piège, torche, salle, dalle, mine, catacomb, ruine, porte, escalier, obscur"},
-    {emoji:"⚔️",name:"Combat",prio:true,kw:"combat, initiative, attaque, frapp, épée, hache, arc, flèche, bouclier, dégât, points de vie, gobelin, orc, squelette, bandit, embuscade, charge, coup critique"},
-    {emoji:"🐉",name:"Épique / boss",prio:true,kw:"dragon, liche, démon, géant, boss, seigneur des ténèbres, rugiss, souffle de feu, colossal, titan, apocalypse, dernier combat, champion"},
-    {emoji:"✨",name:"Magie & mystère",prio:false,kw:"magie, sort, sortilège, mage, sorcier, enchant, rune, arcane, elfe, fée, portail, prophétie, oracle, artefact, cristal, aura, rituel"},
-    {emoji:"🔥",name:"Feu de camp",prio:false,kw:"camp, feu de camp, bivouac, repos, dormir, nuit, tour de garde, étoile, histoire, souvenir, soigner, repos long, repos court"},
-    {emoji:"🥀",name:"Tristesse",prio:false,kw:"mort, mourir, funérailles, deuil, larme, pleur, adieu, perdu, tombe, sacrifice, regret"}
+    {emoji:"🍺",name:"Taverne",playlist:"https://open.spotify.com/playlist/1Evo2IzNS2LAY1608qn8wX",plName:"Tavern Music (Medieval / Celtic)",prio:false,kw:"taverne, auberge, bière, hydromel, aubergiste, barde, chope, ivre, ripaille, comptoir, chambre, repas, tavernier"},
+    {emoji:"🏰",name:"Ville & marché",playlist:"https://open.spotify.com/playlist/4R77muEbcwTT48yPFlUxRu",plName:"RPG: Fantasy Ambience",prio:false,kw:"ville, cité, marché, marchand, échoppe, garde, château, roi, reine, seigneur, noble, palais, rue, place, forgeron, temple, acheter, vendre"},
+    {emoji:"🌲",name:"Voyage & nature",playlist:"https://open.spotify.com/playlist/17yld6VQsHhGj7I214kei1",plName:"RPG Ambiance Fantasy",prio:false,kw:"forêt, route, chemin, voyage, plaine, colline, montagne, rivière, cheval, monture, marche, campagne, sentier, horizon, lieue, village"},
+    {emoji:"🗝️",name:"Donjon",playlist:"https://open.spotify.com/playlist/0VC91CzBjpws9CDbgxvRcF",plName:"Dungeon Crawling music",prio:false,kw:"donjon, souterrain, caverne, grotte, crypte, tombeau, couloir, piège, torche, salle, dalle, mine, catacomb, ruine, porte, escalier, obscur"},
+    {emoji:"⚔️",name:"Combat",playlist:"https://open.spotify.com/playlist/5itc0hInJaDGosUvmwVwxC",plName:"DnD Combat Music",prio:true,kw:"combat, initiative, attaque, frapp, épée, hache, arc, flèche, bouclier, dégât, points de vie, gobelin, orc, squelette, bandit, embuscade, charge, coup critique"},
+    {emoji:"🐉",name:"Épique / boss",playlist:"https://open.spotify.com/playlist/08a88egTVctkeGdtP3FbgI",plName:"Epic Battle/War Music",prio:true,kw:"dragon, liche, démon, géant, boss, seigneur des ténèbres, rugiss, souffle de feu, colossal, titan, apocalypse, dernier combat, champion"},
+    {emoji:"✨",name:"Magie & mystère",playlist:"https://open.spotify.com/playlist/0XKcfzngmoFqDfF3As1FZR",plName:"Elven Music – Fantasy Music",prio:false,kw:"magie, sort, sortilège, mage, sorcier, enchant, rune, arcane, elfe, fée, portail, prophétie, oracle, artefact, cristal, aura, rituel"},
+    {emoji:"🔥",name:"Feu de camp",playlist:"https://open.spotify.com/playlist/7loBeNsSPamwV7sK4X0qJG",plName:"Fantasy Chill | D&D | RPG",prio:false,kw:"camp, feu de camp, bivouac, repos, dormir, nuit, tour de garde, étoile, histoire, souvenir, soigner, repos long, repos court"},
+    {emoji:"🥀",name:"Tristesse",playlist:"https://open.spotify.com/playlist/6ePF1N5TPfVRf82fqrRykt",plName:"Elven Ballads / Fantasy Music",prio:false,kw:"mort, mourir, funérailles, deuil, larme, pleur, adieu, perdu, tombe, sacrifice, regret"}
   ]},
   perso: { name: "Personnalisé", ambs: [
     {emoji:"🎵",name:"Ambiance 1",prio:false,kw:""}
@@ -179,11 +179,15 @@ const KEY = "ambianceJdR.v1";
 const clone = o => JSON.parse(JSON.stringify(o));
 function defaults(){
   const u = {};
-  for (const k in PRESETS) u[k] = {name: PRESETS[k].name, ambs: PRESETS[k].ambs.map(a => ({...a, playlist:"", plName:""}))};
+  for (const k in PRESETS) u[k] = {name: PRESETS[k].name, ambs: PRESETS[k].ambs.map(a => ({playlist:"", plName:"", ...a}))};
   return {univ:"horreur", universes:u, clientId:"", deviceId:"", sens:5, dwell:40, fade:true, shuffle:true};
 }
 let S;
 try { S = Object.assign(defaults(), JSON.parse(localStorage.getItem(KEY) || "{}")); } catch(e){ S = defaults(); }
+for (const k in PRESETS) if (S.universes[k]) S.universes[k].ambs.forEach(a => {
+  const p = PRESETS[k].ambs.find(x => x.name===a.name);
+  if (p && p.playlist && !a.playlist) { a.playlist = p.playlist; a.plName = p.plName; }
+});
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
 const ambs = () => S.universes[S.univ].ambs;
 
