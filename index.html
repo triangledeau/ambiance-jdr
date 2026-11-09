@@ -187,6 +187,7 @@ const PRESETS = {
 
 /* ================= ÉTAT ================= */
 const KEY = "ambianceJdR.v1";
+const DEFAULT_CLIENT_ID = "98ebca53ebaa4606ab53a85e75808207";
 const clone = o => JSON.parse(JSON.stringify(o));
 function defaults(){
   const u = {};
@@ -195,6 +196,7 @@ function defaults(){
 }
 let S;
 try { S = Object.assign(defaults(), JSON.parse(localStorage.getItem(KEY) || "{}")); } catch(e){ S = defaults(); }
+if (!S.clientId) S.clientId = DEFAULT_CLIENT_ID;
 for (const k in PRESETS) if (!S.universes[k]) S.universes[k] = clone(defaults().universes[k]);
 for (const k in PRESETS) if (S.universes[k]) S.universes[k].ambs.forEach(a => {
   const p = PRESETS[k].ambs.find(x => x.name===a.name);
